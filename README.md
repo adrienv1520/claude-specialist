@@ -363,6 +363,7 @@ This keeps your Claude Master’s knowledge base continuously refreshed.
 | `DRIVE_RCLONE_CONFIG` | **secret** | Full rclone configuration block containing the Google Drive remote, see [How to obtain your rclone config](#how-to-obtain-your-rclone-config) | Yes (if using Drive sync) | *none* | Plain-text rclone config |
 | `TELEGRAM_CHAT_ID` | **secret** | Telegram chat ID for release notifications | No | *none* | `123456789` |
 | `TELEGRAM_BOT_TOKEN` | **secret** | Telegram bot API token used to send messages | No | *none* | `123456789:ABCdefGhIJkLmNoPqRsTuVwxyZ` |
+| `MAX_REMOVED_FILES_PERCENTAGE` | variable | Maximum allowed percentage of removed files for each docs folder before the workflow aborts for safety. Prevents accidental mass-deletions from being committed or synced to Google Drive | No | `25` | `30` |
 
 Clone this repository, set the variables you want, and the workflow takes care of the rest.
 

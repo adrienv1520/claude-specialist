@@ -22,6 +22,8 @@ env:
   DRIVE_SYNC_RESOURCES: ${{ vars.DRIVE_SYNC_RESOURCES || 'false' }}
   DRIVE_SYNC_CODE: ${{ vars.DRIVE_SYNC_CODE || 'false' }}
 
+  MAX_REMOVED_FILES_PERCENTAGE: "${{ vars.MAX_REMOVED_FILES_PERCENTAGE || '25' }}"
+
 jobs:
   update-and-publish:
     if: github.ref == 'refs/heads/main'
@@ -53,16 +55,85 @@ jobs:
       - name: Check for file changes
         id: git_status
         run: |
+          echo "Max allowed removed percentage: ${MAX_REMOVED_FILES_PERCENTAGE}%"
+          echo "Docs path: ${DOCS_PATH}"
+
           CHANGED_FILES="$(git status --porcelain "${DOCS_PATH}"/ | grep -vE "${DOCS_IGNORE_PATTERN}" || true)"
 
           if [ -z "$CHANGED_FILES" ]; then
             echo "No relevant changes detected."
             echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            echo "Relevant changes detected:"
-            echo "$CHANGED_FILES"
-            echo "has_changes=true" >> $GITHUB_OUTPUT
+            exit 0
           fi
+
+          echo "Relevant changes detected:"
+          echo "$CHANGED_FILES"
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+
+          FOLDERS=(
+            "${DOCS_CODE_FOLDER_NAME}"
+            "${DOCS_DEVELOPER_FOLDER_NAME}"
+            "${DOCS_RESOURCES_FOLDER_NAME}"
+            "${DOCS_API_FOLDER_NAME}"
+          )
+
+          CRITICAL=false
+
+          if git rev-parse --verify --quiet HEAD >/dev/null; then
+            HAVE_HEAD=true
+          else
+            HAVE_HEAD=false
+          fi
+
+          for name in "${FOLDERS[@]}"; do
+            FOLDER_PATH="${DOCS_PATH}/${name}"
+
+            if [ ! -d "$FOLDER_PATH" ]; then
+              echo "❌ CRITICAL: Folder '${FOLDER_PATH}' is missing in working tree. Aborting."
+              CRITICAL=true
+              continue
+            fi
+
+            if [ "$HAVE_HEAD" = true ]; then
+              TOTAL_FOLDER_FILES="$(git ls-tree -r --name-only HEAD -- "$FOLDER_PATH" | wc -l | tr -d '[:space:]')"
+              REMOVED_FOLDER_FILES="$(git diff --name-only --diff-filter=D HEAD -- "$FOLDER_PATH" 2>/dev/null | wc -l | tr -d '[:space:]')"
+            else
+              CURRENT_FOLDER_FILES="$(find "$FOLDER_PATH" -type f 2>/dev/null | wc -l | tr -d '[:space:]')"
+              REMOVED_FOLDER_FILES="$(echo "$CHANGED_FILES" | grep "^ D " | grep "$FOLDER_PATH" | wc -l | tr -d '[:space:]')"
+
+              if [ "$CURRENT_FOLDER_FILES" -eq 0 ] && [ "$REMOVED_FOLDER_FILES" -eq 0 ]; then
+                TOTAL_FOLDER_FILES=0
+              else
+                TOTAL_FOLDER_FILES=$(( CURRENT_FOLDER_FILES + REMOVED_FOLDER_FILES ))
+              fi
+            fi
+
+            TOTAL_FOLDER_FILES="${TOTAL_FOLDER_FILES:-0}"
+            REMOVED_FOLDER_FILES="${REMOVED_FOLDER_FILES:-0}"
+
+            if [ "$TOTAL_FOLDER_FILES" -eq 0 ]; then
+              echo "❌ CRITICAL: Folder '$FOLDER_PATH' has 0 files in total (before deletion). Aborting."
+              CRITICAL=true
+              continue
+            fi
+
+            FOLDER_PERCENTAGE=$(( REMOVED_FOLDER_FILES * 100 / TOTAL_FOLDER_FILES ))
+
+            echo "Folder check: $name → removed ${REMOVED_FOLDER_FILES}/${TOTAL_FOLDER_FILES} (${FOLDER_PERCENTAGE}%)"
+
+            if [ "$FOLDER_PERCENTAGE" -ge "$MAX_REMOVED_FILES_PERCENTAGE" ]; then
+              echo "❌ CRITICAL: Folder '${name}' exceeds safe deletion threshold (${FOLDER_PERCENTAGE}% ≥ ${MAX_REMOVED_FILES_PERCENTAGE}%)."
+              CRITICAL=true
+            fi
+          done
+
+          if [ "$CRITICAL" = true ]; then
+            echo "❌ CRITICAL: deletion threshold exceeded or missing folders detected. Please check logs above. Aborting."
+            exit 1
+          fi
+
+          echo "All folder checks passed."
+          exit 0
 
       ########################################################################
       # VERSION + RELEASE
