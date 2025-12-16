@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Developer). It is updated automatically._
 
-**Last updated:** Tue, 16 Dec 2025 01:19:06 GMT
+**Last updated:** Tue, 16 Dec 2025 12:36:19 GMT
 
 ---
 
@@ -41,7 +41,6 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 
 ## Agents And Tools
 
-- [Claude For Sheets](./agents-and-tools-claude-for-sheets.md)
 - [Tool Use | Overview](./agents-and-tools-tool-use-overview.md)
 - [Tool Use | Implement Tool Use](./agents-and-tools-tool-use-implement-tool-use.md)
 - [Tool Use | Fine Grained Tool Streaming](./agents-and-tools-tool-use-fine-grained-tool-streaming.md)

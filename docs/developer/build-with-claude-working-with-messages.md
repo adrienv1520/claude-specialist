@@ -427,7 +427,8 @@ Claude can read both text and images in requests. We support both `base64` and `
 }
 ```
 
-## Tool use, JSON mode, and computer use
+## Tool use and computer use
 
-See our [guide](./agents-and-tools-tool-use-overview.md) for examples for how to use tools with the Messages API.
+See our [guide](./agents-and-tools-tool-use-overview.md) for examples of how to use tools with the Messages API.
 See our [computer use guide](./agents-and-tools-tool-use-computer-use-tool.md) for examples of how to control desktop computer environments with the Messages API.
+For guaranteed JSON output, see [Structured Outputs](./build-with-claude-structured-outputs.md).

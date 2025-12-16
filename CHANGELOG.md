@@ -1,5 +1,20 @@
 # Changelog
 
+## 🤖 v1.0.10 - 16/12/2025
+
+File Changes:
+
+- Modified: `docs/README.md`
+- Modified: `docs/api/README.md`
+- Modified: `docs/api/openai-sdk.md`
+- Modified: `docs/developer/README.md`
+- Deleted: `docs/developer/agents-and-tools-claude-for-sheets.md`
+- Modified: `docs/developer/agents-and-tools-tool-use-overview.md`
+- Modified: `docs/developer/build-with-claude-structured-outputs.md`
+- Modified: `docs/developer/build-with-claude-working-with-messages.md`
+- Modified: `docs/developer/test-and-evaluate-strengthen-guardrails-increase-consistency.md`
+
+
 ## 🤖 v1.0.9 - 16/12/2025
 
 File Changes:
