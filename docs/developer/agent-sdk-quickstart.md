@@ -314,9 +314,8 @@ The example above uses `acceptEdits` mode, which auto-approves file operations s
 
 Now that you've created your first agent, learn how to extend its capabilities and tailor it to your use case:
 
-- **[Available tools](https://docs.anthropic.com/en/docs/claude-code/cli-reference#tools-available-to-claude)**: full list of built-in tools your agent can use
 - **[Permissions](./agent-sdk-permissions.md)**: control what your agent can do and when it needs approval
-- **[Hooks](https://docs.anthropic.com/en/docs/claude-code/hooks)**: run custom code before or after tool calls
+- **[Hooks](./agent-sdk-hooks.md)**: run custom code before or after tool calls
 - **[Sessions](./agent-sdk-sessions.md)**: build multi-turn agents that maintain context
 - **[MCP servers](./agent-sdk-mcp.md)**: connect to databases, browsers, APIs, and other external systems
 - **[Hosting](./agent-sdk-hosting.md)**: deploy agents to Docker, cloud, and CI/CD

@@ -1,5 +1,31 @@
 # Changelog
 
+## 🤖 v1.0.11 - 17/12/2025
+
+File Changes:
+
+- Modified: `docs/README.md`
+- Modified: `docs/code/README.md`
+- Modified: `docs/code/amazon-bedrock.md`
+- Modified: `docs/code/overview.md`
+- Modified: `docs/code/plugin-marketplaces.md`
+- Modified: `docs/code/quickstart.md`
+- Modified: `docs/code/settings.md`
+- Modified: `docs/code/setup.md`
+- Modified: `docs/code/troubleshooting.md`
+- Modified: `docs/code/vs-code.md`
+- Modified: `docs/developer/README.md`
+- Modified: `docs/developer/agent-sdk-overview.md`
+- Modified: `docs/developer/agent-sdk-permissions.md`
+- Modified: `docs/developer/agent-sdk-python.md`
+- Modified: `docs/developer/agent-sdk-quickstart.md`
+- Modified: `docs/developer/agent-sdk-typescript.md`
+- Modified: `docs/developer/agents-and-tools-tool-use-web-search-tool.md`
+- Modified: `docs/developer/build-with-claude-usage-cost-api.md`
+- Modified: `docs/developer/intro.md`
+- Added: `docs/developer/agent-sdk-hooks.md`
+
+
 ## 🤖 v1.0.10 - 16/12/2025
 
 File Changes:

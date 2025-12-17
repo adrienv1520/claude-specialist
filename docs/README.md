@@ -2,7 +2,7 @@
 
 _This section lists all the mirroring documentation from the official **Claude** documentation. It is updated automatically._
 
-**Last updated:** Tue, 16 Dec 2025 12:36:19 GMT
+**Last updated:** Wed, 17 Dec 2025 01:14:14 GMT
 
 ---
 
