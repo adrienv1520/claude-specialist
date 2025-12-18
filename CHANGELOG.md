@@ -1,5 +1,16 @@
 # Changelog
 
+## 🤖 v1.1.1 - 18/12/2025
+
+File Changes:
+
+- Modified: `docs/README.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/developer/developer-README.md`
+- Modified: `docs/resources/resources-README.md`
+
+
 ## 🧑‍💻 v1.1.0 - 18/12/2025
 
 - feat: align docs structure for consistent ingestion and linking to match Claude's best practices
