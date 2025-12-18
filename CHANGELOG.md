@@ -1,5 +1,10 @@
 # Changelog
 
+## 🧑‍💻 v1.1.0 - 18/12/2025
+
+- feat: align docs structure for consistent ingestion and linking to match Claude's best practices
+
+
 ## 🤖 v1.0.11 - 17/12/2025
 
 File Changes:

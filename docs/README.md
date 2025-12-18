@@ -2,14 +2,14 @@
 
 _This section lists all the mirroring documentation from the official **Claude** documentation. It is updated automatically._
 
-**Last updated:** Wed, 17 Dec 2025 01:14:14 GMT
+**Last updated:** Thu, 18 Dec 2025 08:10:13 GMT
 
 ---
 
 ## Documentation
 
-- [Claude Code](./code/README.md)
-- [Platform | API](./api/README.md)
-- [Platform | Developer](./developer/README.md)
-- [Platform | Resources](./resources/README.md)
+- [Claude Code](./code/code-README.md)
+- [Platform | API](./api/api-README.md)
+- [Platform | Developer](./developer/developer-README.md)
+- [Platform | Resources](./resources/resources-README.md)
 

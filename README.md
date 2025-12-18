@@ -5,9 +5,12 @@
 <!-- omit in toc -->
 # Claude Master
 
+A production-ready Claude Project foundation built on official documentation.
+
 - [What This Repository Is](#what-this-repository-is)
 - [Documentation Structure](#documentation-structure)
 - [Master's System Prompt](#masters-system-prompt)
+- [Best Practices for Claude Project Knowledge Bases](#best-practices-for-claude-project-knowledge-bases)
 - [How to Use This Repository](#how-to-use-this-repository)
   - [1. Documentation Preparation](#1-documentation-preparation)
     - [Automated Documentation Preparation](#automated-documentation-preparation)
@@ -27,7 +30,7 @@
 - [Contributions](#contributions)
 - [License](#license)
 
-An automatically updated, structured mirror of the official Claude documentation combined with a production-ready system-prompt framework that lets you build a fully grounded, Claude Master assistant inside any Claude Project. Documentation [is refreshed **every x hours** using GitHub Actions](https://github.com/adrienv1520/claude-master/blob/main/.github/workflows/update-docs.yml#L7).
+An automatically updated, structured mirror of the official Claude documentation combined with a production-ready system-prompt framework that lets you build a fully grounded, Claude Master assistant inside any Claude Project. Documentation is refreshed automatically via GitHub Actions ([see workflow schedule](https://github.com/adrienv1520/claude-master/blob/main/.github/workflows/update-docs.yml#L7)).
 
 <div align="center">
 
@@ -61,6 +64,9 @@ This repository provides:
 - **A complete, automatically updated mirror of the Claude documentation**
   - **Claude Platform** → Developer, API, Resources (Release Notes excluded)
   - **Claude Code**
+- **Ready-to-ingest documentation for Claude Projects**
+  - Files are pre-structured, named, and formatted according to Claude ingestion best practices.
+  - Can be uploaded directly into a Claude Project without any transformation.
 - **Optional Google Drive synchronization**, allowing you to keep your knowledge base always up to date (manual upload to a Claude Project still required).
 - **Optional Telegram notifications** every time new documentation is fetched and published.
 - **A system-prompt framework** used to build a `Claude Master` inside a Claude Project.
@@ -289,6 +295,68 @@ You succeed when:
 
 ---
 
+## Best Practices for Claude Project Knowledge Bases
+
+The documentation in this repository is designed around Claude’s own recommendations for optimal document ingestion.
+
+The following best practices are **automatically enforced** by this project through its output structure and naming rules.
+
+1. **Use One Level of Subfolders**
+
+    Claude performs best with a single level of categorization, avoiding deep nesting.
+
+    Recommended structure:
+
+    ```shell
+    docs/
+    ├── code/
+    │   ├── code-amazon-bedrock.md
+    │   └── code-analytics.md
+    │   └── ...
+    ├── developer/
+    │   ├── developer-about-claude-model-deprecations.md
+    │   └── developer-about-claude-models-choosing-a-model.md
+    │   └── ...
+    └── resources/
+    │   ├── resources-about-claude-glossary.md
+    │   └── resources-about-claude-use-case-guides-content-moderation.md
+    │   └── ...
+    ```
+
+    This strikes the right balance between clarity and simplicity.
+
+2. **Prefer Multiple, Small Files**
+
+    Smaller, focused documents improve retrieval accuracy and reduce irrelevant context when Claude answers questions.
+
+3. **Filenames Are Critical Metadata**
+
+    Filenames are scanned before content and act as implicit context.
+
+    ✅ **Good examples**:
+      - business-setup-uk-llp.md
+      - aml-uae-law-2023.md
+
+    ❌ **Avoid**:
+      - doc1.md
+      - final-version.pdf
+
+    ✅ **Use**:
+      - Hyphens (`-`)
+      - Years, regions, and document type when relevant
+      - No special characters
+
+4. **Clean and Standard Markdown**
+
+    Stick to clean Markdown:
+      - Avoid custom syntax
+      - Avoid excessive HTML
+      - Keep headings meaningful
+
+    This ensures compatibility with Claude’s internal parsing and chunking.
+
+---
+
 ## How to Use This Repository
 
 ### 1. Documentation Preparation
@@ -457,6 +525,8 @@ Issues and pull requests are welcome — especially for:
 - Additional export targets
 
 ---
+
+**This repository is designed to be forked, automated, and adapted to your own Claude workflows.**
 
 ## License
 

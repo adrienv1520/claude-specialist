@@ -18,19 +18,19 @@ const DOCS = {
   api: {
     name: 'Platform | API',
     paths: ['/api/', '/get-started'],
-    readmePath: `${DOCS_DIR}/api/README.md`,
+    readmePath: `${DOCS_DIR}/api/api-README.md`,
     type: 'api',
   },
   developer: {
     name: 'Platform | Developer',
     paths: [], // all the rest
-    readmePath: `${DOCS_DIR}/developer/README.md`,
+    readmePath: `${DOCS_DIR}/developer/developer-README.md`,
     type: 'developer',
   },
   resources: {
     name: 'Platform | Resources',
     paths: ['/resources/', '/about-claude/glossary', '/about-claude/use-case-guides/'],
-    readmePath: `${DOCS_DIR}/resources/README.md`,
+    readmePath: `${DOCS_DIR}/resources/resources-README.md`,
     type: 'resources',
   },
 };
@@ -146,25 +146,24 @@ async function fetchAllUrlsFromSitemap() {
   }
 
   const filenamesByURLs = {};
+
   for (const url of filteredUrls) {
     const filename = urlToFilename(url);
     const docType = determineDocType(url);
     let cleanFilename = filename;
 
-    // if (cleanFilename.startsWith(`${docType}-`)) {
-    //   cleanFilename = cleanFilename.replace(`${docType}-`, '');
-    // }
-
     while (cleanFilename.startsWith(`${docType}-`)) {
       cleanFilename = cleanFilename.replace(`${docType}-`, '');
     }
 
-    const docRelative = `${docType}/${cleanFilename}`;
+    const prefixedFilename = `${docType}-${cleanFilename}`;
+    const docRelative = `${docType}/${prefixedFilename}`;
+
     filenamesByURLs[url] = {
       category: extractCategory(url),
       docRelative,
       docType,
-      filename: cleanFilename,
+      filename: prefixedFilename,
       relativePath: url.replace(URL_PREFIX, '').replace(/\.md$/, ''),
     };
   }

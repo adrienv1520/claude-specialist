@@ -14,7 +14,7 @@ const DOCS_DIR = 'docs';
 const DOCS = {
   code: {
     name: 'Claude Code',
-    readmePath: `${DOCS_DIR}/code/README.md`,
+    readmePath: `${DOCS_DIR}/code/code-README.md`,
     type: 'code',
   },
 };
@@ -48,27 +48,46 @@ async function cleanPreviousBuild() {
  */
 async function downloadAndSaveDocs(allUrls) {
   console.log('📖 3. Downloading, rewriting, and saving documentation...');
-  const downloadPromises = [];
 
-  for (const url of allUrls) {
+  const processedDocs = [];
+
+  const downloadPromises = allUrls.map(async (url) => {
     const urlMdFile = `${url}.md`;
-    const fileSlug = path.basename(url);
-    const filePath = path.join(DOCS_DIR, DOCS.code.type, `${fileSlug}.md`);
+    const slug = path.basename(url);
+    const filename = `${DOCS.code.type}-${slug}.md`;
+    const relativePath = `./${filename}`;
+    const filePath = path.join(DOCS_DIR, DOCS.code.type, filename);
 
-    downloadPromises.push(
-      axios.get(urlMdFile, { responseType: 'text' })
-        .then((response) => {
-          /* eslint-disable-next-line security-node/detect-crlf */
-          console.log(`   -> Processing ${filePath}`);
-          const rewrittenContent = rewriteLocalLinks(response.data, filePath);
-          return fs.writeFile(filePath, rewrittenContent, 'utf8');
-        })
-        .catch((error) => console.error(`   ! Failed to process ${urlMdFile}: ${error.message}`)),
-    );
-  }
+    try {
+      const response = await axios.get(urlMdFile, { responseType: 'text' });
+
+      /* eslint-disable-next-line security-node/detect-crlf */
+      console.log(`   -> Processing ${filePath}`);
+
+      const rewrittenContent = rewriteLocalLinks(response.data);
+
+      await fs.writeFile(filePath, rewrittenContent, 'utf8');
+
+      processedDocs.push({
+        filename,
+        relativePath,
+        slug,
+        title: slug
+          .split('-')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' '),
+        url,
+      });
+    }
+    catch (error) {
+      console.error(`   ! Failed to process ${urlMdFile}: ${error.message}`);
+    }
+  });
 
   await Promise.all(downloadPromises);
+
   console.log('   File processing complete.');
+  return processedDocs;
 }
 
 /**
@@ -103,20 +122,20 @@ async function fetchAllUrlsFromSitemap() {
  * Generates a README.md file with a complete table of contents
  * linking to all the mirrored documentation files.
  */
-async function generateReadme(allUrls) {
+async function generateReadme(processedDocs) {
   console.log('👓 4. Generating README.md...');
+
   let readmeContent = '# Claude Code Docs\n\n';
   /* eslint-disable-next-line @stylistic/max-len */
   readmeContent += `_This repository is a mirror of the official [Claude Code](${URL_PREFIX}) documentation. It is updated automatically._\n\n`;
   readmeContent += `**Last updated:** ${new Date().toUTCString()}\n\n`;
   readmeContent += '---\n\n';
-
   readmeContent += '## Documentation\n\n';
-  for (const url of allUrls) {
-    const fileSlug = path.basename(url);
-    const title = fileSlug.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    readmeContent += `- [${title}](./${DOCS_DIR}/${DOCS.code.type}/${fileSlug}.md)\n`;
+
+  for (const doc of processedDocs) {
+    readmeContent += `- [${doc.title}](${doc.relativePath})\n`;
   }
+
   readmeContent += '\n';
 
   await fs.writeFile(DOCS.code.readmePath, readmeContent);
@@ -128,15 +147,14 @@ async function generateReadme(allUrls) {
  * to relative local file links.
  */
 function rewriteLocalLinks(content) {
-  // This regex finds internal links like "/en/costs#fragment" or the older
-  // "/en/docs/claude-code/page#fragment" and captures the slug and fragment.
+  // Matches:
+  // /en/some-page
+  // /en/some-page#anchor
+  // /en/docs/claude-code/some-page
   const linkRegex = /\]\(\/en\/(?:docs\/claude-code\/)?([^"#)]+)(#[^")]*)?\)/g;
 
-  return content.replaceAll(linkRegex, (match, targetSlug, fragment = '') => {
-    const safeFragment = fragment;
-
-    // Reconstruct the Markdown link with a relative path to the local file.
-    return `](./${targetSlug}.md${safeFragment})`;
+  return content.replaceAll(linkRegex, (_match, targetSlug, fragment = '') => {
+    return `](./${DOCS.code.type}-${targetSlug}.md${fragment})`;
   });
 }
 
@@ -146,8 +164,8 @@ function rewriteLocalLinks(content) {
 async function run() {
   await cleanPreviousBuild();
   const allUrls = await fetchAllUrlsFromSitemap();
-  await downloadAndSaveDocs(allUrls);
-  await generateReadme(allUrls);
+  const processedDocs = await downloadAndSaveDocs(allUrls);
+  await generateReadme(processedDocs);
   console.log('\n✅ Claude Code documentation updated successfully!');
 }
 
