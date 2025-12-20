@@ -1,5 +1,47 @@
 # Changelog
 
+## 🤖 v1.1.5 - 20/12/2025
+
+File Changes:
+
+- Modified: `docs/README.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Modified: `docs/api/api-service-tiers.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-mcp.md`
+- Deleted: `docs/code/code-migration-guide.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/developer/developer-README.md`
+- Modified: `docs/developer/developer-about-claude-model-deprecations.md`
+- Modified: `docs/developer/developer-about-claude-models-overview.md`
+- Modified: `docs/developer/developer-about-claude-pricing.md`
+- Modified: `docs/developer/developer-agent-sdk-overview.md`
+- Modified: `docs/developer/developer-agent-sdk-quickstart.md`
+- Modified: `docs/developer/developer-agent-sdk-subagents.md`
+- Modified: `docs/developer/developer-agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/developer/developer-agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/developer/developer-agents-and-tools-tool-use-web-search-tool.md`
+- Modified: `docs/developer/developer-build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/developer/developer-build-with-claude-claude-on-vertex-ai.md`
+- Modified: `docs/developer/developer-build-with-claude-files.md`
+- Modified: `docs/developer/developer-build-with-claude-multilingual-support.md`
+- Modified: `docs/developer/developer-build-with-claude-prompt-caching.md`
+- Modified: `docs/developer/developer-build-with-claude-search-results.md`
+- Modified: `docs/resources/resources-README.md`
+- Modified: `docs/resources/resources-about-claude-use-case-guides-ticket-routing.md`
+- Added: `docs/code/code-discover-plugins.md`
+
+
 ## 🧑‍💻 v1.1.4 - 19/12/2025
 
 - fix(ci): ignore generated README files in docs change detection

@@ -10,7 +10,7 @@ The Files API is currently in beta. Please reach out through our [feedback form]
 
 ## Supported models
 
-Referencing a `file_id` in a Messages request is supported in all models that support the given file type. For example, [images](./developer-build-with-claude-vision.md) are supported in all Claude 3+ models, [PDFs](./developer-build-with-claude-pdf-support.md) in all Claude 3.5+ models, and [various other file types](./developer-agents-and-tools-tool-use-code-execution-tool.md#supported-file-types) for the code execution tool in Claude 3.5 Haiku plus all Claude 3.7+ models.
+Referencing a `file_id` in a Messages request is supported in all models that support the given file type. For example, [images](./developer-build-with-claude-vision.md) are supported in all Claude 3+ models, [PDFs](./developer-build-with-claude-pdf-support.md) in all Claude 3.5+ models, and [various other file types](./developer-agents-and-tools-tool-use-code-execution-tool.md#supported-file-types) for the code execution tool in Claude Haiku 4.5 plus all Claude 3.7+ models.
 
 The Files API is currently not supported on Amazon Bedrock or Google Vertex AI.
 

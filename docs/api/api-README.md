@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Api). It is updated automatically._
 
-**Last updated:** Fri, 19 Dec 2025 01:18:31 GMT
+**Last updated:** Sat, 20 Dec 2025 01:14:22 GMT
 
 ---
 

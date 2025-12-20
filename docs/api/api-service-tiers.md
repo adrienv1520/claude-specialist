@@ -116,8 +116,8 @@ Priority Tier is supported by:
 - Claude Opus 4.1
 - Claude Opus 4
 - Claude Sonnet 4
-- Claude Sonnet 3.7
-- Claude Haiku 3.5
+- Claude Sonnet 3.7 ([deprecated](../developer/developer-about-claude-model-deprecations.md))
+- Claude Haiku 3.5 ([deprecated](../developer/developer-about-claude-model-deprecations.md))
 
 Check the [model overview page](../developer/developer-about-claude-models-overview.md) for more details on our models.
 

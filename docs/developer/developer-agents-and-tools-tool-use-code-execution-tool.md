@@ -25,7 +25,7 @@ The code execution tool is available on the following models:
 | Claude Sonnet 4 (`claude-sonnet-4-20250514`) | `code_execution_20250825` |
 | Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](./developer-about-claude-model-deprecations.md)) | `code_execution_20250825` |
 | Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) | `code_execution_20250825` |
-| Claude Haiku 3.5 (`claude-3-5-haiku-latest`) | `code_execution_20250825` |
+| Claude Haiku 3.5 (`claude-3-5-haiku-latest`) ([deprecated](./developer-about-claude-model-deprecations.md)) | `code_execution_20250825` |
 
 <Note>
 The current version `code_execution_20250825` supports Bash commands and file operations. A legacy version `code_execution_20250522` (Python only) is also available. See [Upgrade to latest tool version](#upgrade-to-latest-tool-version) for migration details.
@@ -946,7 +946,7 @@ You can include the code execution tool in the [Messages Batches API](./develope
 Code execution tool usage is tracked separately from token usage. Execution time has a minimum of 5 minutes.
 If files are included in the request, execution time is billed even if the tool is not used due to files being preloaded onto the container.
 
-Each organization receives 50 free hours of usage with the code execution tool per day. Additional usage beyond the first 50 hours is billed at $0.05 per hour, per container.
+Each organization receives 1,550 free hours of usage with the code execution tool per month. Additional usage beyond the first 1,550 hours is billed at $0.05 per hour, per container.
 
 ## Upgrade to latest tool version
 
