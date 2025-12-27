@@ -1,5 +1,14 @@
 # Changelog
 
+## 🤖 v1.1.9 - 27/12/2025
+
+File Changes:
+
+- Modified: `docs/README.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-headless.md`
+
+
 ## 🤖 v1.1.8 - 27/12/2025
 
 File Changes:

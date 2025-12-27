@@ -1,6 +1,6 @@
 {
   "name": "claude-master",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "author": "Adrien Valcke <adrienvalcke@icloud.com> (https://github.com/adrienv1520)",
   "description": "An automatically updated, structured mirror of the official Claude documentation combined with a production-ready system-prompt framework that lets you build a fully grounded, Claude Master assistant inside any Claude Project.",
   "type": "module",
